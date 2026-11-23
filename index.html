@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ДЕМО · Оценка образовательной программы — опрос студентов</title>
+<meta name="description" content="Анонимный опрос студентов 1–2 курса программ топ-уровня в сфере ИИ, РГАУ-МСХА имени К.А. Тимирязева.">
+<meta name="robots" content="noindex">
+<style>
+:root{--ink:#2c2c2c;--green:#3ece5f;--green-deep:#177a3c;--green-soft:#e9f8ed;--paper:#fff;--mist:#f3f5f3;--line:#dde1dd;--muted:#666b66;--danger:#b42318;--danger-soft:#fdf0ef}
+*{box-sizing:border-box}
+body{margin:0;font-family:"Suisse Intl","Helvetica Neue",Helvetica,Arial,sans-serif;font-size:16px;line-height:1.5;color:var(--ink);background:var(--mist);-webkit-font-smoothing:antialiased}
+:focus-visible{outline:3px solid var(--green-deep);outline-offset:2px}
+.top{background:#fff;border-bottom:1px solid var(--line)}
+.top .in{max-width:760px;margin:0 auto;padding:12px 16px;display:flex;align-items:center;gap:12px}
+.top img{height:42px;width:auto;display:block}
+.top .uni{font-size:12.5px;line-height:1.3;color:var(--muted)}.top .uni b{display:block;color:var(--ink);font-weight:600}
+main{max-width:760px;margin:0 auto;padding:28px 16px 64px}
+.eyebrow{display:flex;align-items:center;gap:12px;color:var(--muted);font-size:12.5px;letter-spacing:.09em;text-transform:uppercase;margin:0 0 12px}
+.eyebrow i{width:32px;height:2px;background:var(--green)}
+h1{font-size:34px;line-height:1.12;font-weight:700;margin:0 0 12px;letter-spacing:-.01em}
+.lead{color:var(--muted);font-size:17px;margin:0 0 20px}
+.anon{display:flex;gap:12px;align-items:flex-start;background:var(--green-soft);border-radius:14px;padding:14px 16px;font-size:14.5px;margin:0 0 24px}
+.anon svg{flex:0 0 22px;margin-top:1px}
+.card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:24px;margin:0 0 16px}
+.card h2{font-size:20px;font-weight:600;margin:0 0 4px}
+.card .hint{color:var(--muted);font-size:14px;margin:0 0 18px}
+.field{margin:0 0 18px}.field:last-child{margin-bottom:0}
+.field>label,.field>.lbl{display:block;font-weight:500;margin:0 0 6px}
+.req{color:var(--danger)}
+input[type=text],select{width:100%;font:inherit;padding:12px 14px;border:1px solid #c9ccc9;border-radius:12px;background:#fff;color:var(--ink)}
+select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='9' viewBox='0 0 14 9'%3E%3Cpath d='M1 1l6 6 6-6' fill='none' stroke='%23666' stroke-width='2'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:40px}
+input[type=text]:focus,select:focus{border-color:var(--green-deep);outline:none;box-shadow:0 0 0 3px rgba(23,122,60,.15)}
+.small{font-size:13px;color:var(--muted);margin:6px 0 0}
+.fio-miss{color:var(--danger)}
+.who{background:var(--green-soft);border-radius:14px;padding:14px 16px;margin:0 0 18px;display:grid;gap:10px}
+.who span{display:block;font-size:12.5px;color:var(--muted)}
+.who b{font-weight:500}
+.who .row{display:flex;gap:32px;flex-wrap:wrap}
+.opts{display:grid;gap:8px}
+.opt{display:flex;gap:12px;align-items:flex-start;border:1px solid #c9ccc9;border-radius:12px;padding:11px 14px;cursor:pointer;background:#fff}
+.opt input{margin:3px 0 0;accent-color:var(--green-deep);width:18px;height:18px;flex:0 0 auto}
+.opt:has(input:checked){border-color:var(--green-deep);background:var(--green-soft)}
+.opt .code{display:block;font-size:13px;color:var(--muted)}
+.seg{display:inline-flex;border:1px solid #c9ccc9;border-radius:999px;padding:3px;background:#fff}
+.seg label{position:relative;cursor:pointer}
+.seg input{position:absolute;opacity:0;inset:0}
+.seg span{display:block;padding:8px 22px;border-radius:999px;font-weight:500}
+.seg input:checked+span{background:var(--ink);color:#fff}
+.seg input:focus-visible+span{outline:3px solid var(--green-deep);outline-offset:1px}
+/* вопросы со шкалой */
+.q{padding:18px 0;border-top:1px solid var(--line)}
+.q:first-of-type{border-top:0;padding-top:4px}
+.q .text{font-weight:500;margin:0 0 12px;display:flex;gap:10px}
+.q .num{flex:0 0 auto;width:26px;height:26px;border-radius:50%;background:var(--mist);font-size:13px;display:inline-flex;align-items:center;justify-content:center;font-weight:600}
+.q.answered .num{background:var(--green);color:#1b1b1b}
+.q.missing .text{color:var(--danger)}
+.q.missing .num{background:var(--danger);color:#fff}
+.scale{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px;margin:0;padding:0;border:0}
+.scale legend{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+.scale label{position:relative;cursor:pointer;text-align:center}
+.scale input{position:absolute;opacity:0;inset:0}
+.scale b{display:flex;align-items:center;justify-content:center;height:46px;border:1px solid #c9ccc9;border-radius:12px;font-size:18px;font-weight:600;background:#fff;transition:background .12s,border-color .12s}
+.scale label:hover b{border-color:var(--green-deep)}
+.scale input:checked+b{background:var(--green);border-color:var(--green);color:#1b1b1b}
+.scale input:focus-visible+b{outline:3px solid var(--green-deep);outline-offset:2px}
+.scale small{display:block;font-size:11.5px;line-height:1.25;color:var(--muted);margin-top:6px}
+.scale input:checked~small{color:var(--ink)}
+.ends{display:none}
+/* отправка */
+.submit{position:sticky;bottom:0;background:rgba(243,245,243,.96);backdrop-filter:blur(6px);margin:0 -16px;padding:14px 16px calc(14px + env(safe-area-inset-bottom));border-top:1px solid var(--line);display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.progress{flex:1 1 180px;font-size:14px;color:var(--muted)}
+.bar{height:6px;border-radius:3px;background:var(--line);margin-top:6px;overflow:hidden}.bar i{display:block;height:100%;width:0;background:var(--green);transition:width .2s}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;background:var(--green);color:#1b1b1b;font:inherit;font-weight:600;font-size:16px;padding:14px 30px;border-radius:999px;border:0;cursor:pointer;min-width:200px}
+.btn:hover{background:#36c257}
+.btn[disabled]{background:#b9c2bb;color:#4b514c;cursor:progress}
+.spin{width:18px;height:18px;border:2.5px solid currentColor;border-right-color:transparent;border-radius:50%;animation:s .7s linear infinite;display:none}
+.btn.busy .spin{display:inline-block}
+@keyframes s{to{transform:rotate(360deg)}}
+.err{display:none;width:100%;background:var(--danger-soft);color:var(--danger);border-radius:12px;padding:11px 14px;font-size:14.5px}
+.err.show{display:block}
+.hp{position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden}
+/* экран «ответ принят» */
+.done{display:none;text-align:center;padding:40px 24px}
+.done .icon{width:76px;height:76px;border-radius:50%;background:var(--green);display:flex;align-items:center;justify-content:center;margin:0 auto 18px}
+.done.info .icon{background:#e7ebf3}
+.done h2{font-size:26px;margin:0 0 8px}
+.done p{color:var(--muted);margin:0 auto 6px;max-width:30em}
+.done .meta{font-size:14px;margin-top:14px}
+.done button.link{background:none;border:0;color:var(--green-deep);font:inherit;font-size:14px;text-decoration:underline;cursor:pointer;margin-top:22px}
+body.is-done #form,body.is-done .intro{display:none}
+body.is-done .done{display:block}
+.closed{display:none}
+body.is-closed #form{display:none}body.is-closed .closed{display:block}
+@media(max-width:560px){
+ h1{font-size:27px}.lead{font-size:16px}
+ .card{padding:18px 16px;border-radius:16px}
+ .scale{gap:6px}.scale b{height:46px;font-size:17px}
+ /* на телефоне подписи под каждой цифрой не помещаются: показываем только края шкалы строкой ниже */
+ .scale small{display:none}
+ .ends{display:flex;justify-content:space-between;gap:16px;font-size:12px;line-height:1.3;color:var(--muted);margin-top:6px}
+ .ends span:last-child{text-align:right}
+ .btn{width:100%}
+}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation-duration:2s!important}}
+</style>
+</head>
+<body>
+<div class="demo-bar"><div class="in"><b>Демо-версия.</b> Ответы никуда не отправляются.
+Для проверки введите ФИО <b>Иванов Иван Иванович</b> (2 курс) или <b>Петрова Анна Сергеевна</b> (1 курс, группу вписать вручную).
+<button type="button" onclick="demoReset()">Начать заново</button></div></div>
+<style>.demo-bar{background:#fff6d6;border-bottom:1px solid #ecd98a;font-size:14px}
+.demo-bar .in{max-width:760px;margin:0 auto;padding:10px 16px}
+.demo-bar button{font:inherit;font-size:13px;margin-left:6px;padding:3px 10px;border:1px solid #c9b25a;border-radius:999px;background:#fff;cursor:pointer}</style>
+
+<header class="top"><div class="in">
+  <img src="assets/institute-mark-navy.png" width="240" height="220" alt="">
+  <span class="uni"><b>РГАУ-МСХА имени К.А. Тимирязева</b>Проектный институт цифровой трансформации АПК</span>
+</div></header>
+
+<main>
+  <div class="intro">
+    <p class="eyebrow"><i></i>Программы топ-уровня в сфере ИИ</p>
+    <h1>Оценка образовательной программы</h1>
+    <p class="lead">Нам важно ваше мнение, чтобы развивать и улучшать программу. Шесть вопросов, около двух минут.</p>
+    <div class="anon">
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#177a3c" stroke-width="2" aria-hidden="true"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
+      <span><b>Анкета анонимная.</b> ФИО нужно только для того, чтобы каждый студент ответил один раз. Оно не сохраняется вместе с ответами: никто не увидит, как ответили именно вы.</span>
+    </div>
+  </div>
+
+  <div class="card closed"><h2>Опрос завершён</h2><p class="hint" style="margin:0">Спасибо всем, кто ответил.</p></div>
+
+  <form id="form" novalidate>
+    <section class="card" aria-labelledby="h-about">
+      <h2 id="h-about">О вас</h2>
+      <p class="hint">По этим данным сверяем, что вы студент программы, и считаем результаты по программам и курсам.</p>
+      <div class="field">
+        <label for="fio">Фамилия, имя, отчество <span class="req">*</span></label>
+        <input type="text" id="fio" name="fio" autocomplete="name" placeholder="Иванов Иван Иванович" required>
+        <p class="small" id="fio-hint">Полностью, как в зачётной книжке. Программа, курс и группа подставятся сами.</p>
+        <p class="small fio-miss" id="fio-miss" hidden>Не нашли вас в списке студентов 1–2 курса. Проверьте написание: полностью, с отчеством, как в зачётке.</p>
+      </div>
+      <div class="who" id="who" hidden aria-live="polite">
+        <div><span>Программа</span><b id="who-program"></b></div>
+        <div class="row"><div><span>Курс</span><b id="who-course"></b></div><div id="who-group-box"><span>Группа</span><b id="who-group"></b></div></div>
+      </div>
+      <!-- программа и курс заполняются по списку студентов, вручную не выбираются -->
+      <div hidden>
+        <div class="opts" id="programs"></div>
+        <div class="seg" id="courses"></div>
+        <select id="group" name="group"><option value=""></option></select>
+      </div>
+      <div class="field" id="f-group" hidden>
+        <label for="group-text">Группа <span class="req">*</span></label>
+        <input type="text" id="group-text" placeholder="Например, ДЭ 31-26">
+        <p class="small">Группы 1 курса нет в списке — впишите её сами.</p>
+      </div>
+    </section>
+
+    <section class="card" aria-labelledby="h-q0">
+      <h2 id="h-q0">Общая оценка</h2>
+      <p class="hint">1 — совсем не устраивает, 5 — всё полностью устраивает.</p>
+      <div id="qs-sat"></div>
+    </section>
+
+    <section class="card" aria-labelledby="h-agree">
+      <h2 id="h-agree">Насколько вы согласны с утверждениями</h2>
+      <p class="hint">1 — полностью не согласен(-а), 5 — полностью согласен(-а).</p>
+      <div id="qs-agree"></div>
+    </section>
+
+    <div class="hp" aria-hidden="true"><label>Не заполняйте <input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
+
+    <div class="submit">
+      <div class="progress"><span id="prog-text">Отвечено 0 из 0</span><div class="bar"><i id="prog-bar"></i></div></div>
+      <button type="submit" class="btn" id="send"><span class="spin" aria-hidden="true"></span><span id="send-text">Отправить ответ</span></button>
+      <div class="err" id="err" role="alert"></div>
+    </div>
+  </form>
+
+  <section class="card done" id="done" aria-live="polite">
+    <div class="icon" id="done-icon"></div>
+    <h2 id="done-title">Ответ принят</h2>
+    <p id="done-text">Спасибо! Ваш ответ записан. Отправлять анкету ещё раз не нужно — можно закрыть страницу.</p>
+    <p class="meta" id="done-meta"></p>
+    <button type="button" class="link" id="again">На этом устройстве отвечает другой студент</button>
+  </section>
+</main>
+
+<script>
+/* ДЕМО: вместо сервера. Ответы остаются в этом браузере и никуда не отправляются. */
+(function () {
+  var CONFIG = {"programs": ["09.03.02 Информационные системы и технологии — Большие данные и машинное обучение", "09.03.02 Информационные системы и технологии — Компьютерные науки и технологии искусственного интеллекта", "09.03.03 Прикладная информатика — Системы искусственного интеллекта", "09.03.03 Прикладная информатика — Программные решения для бизнеса"], "courses": [1, 2], "groups": {}, "questions": [{"id": "q0", "short": "Удовлетворённость", "scale": "sat", "text": "Насколько вы удовлетворены образовательной программой?"}, {"id": "q1", "short": "Содержание ОП", "scale": "agree", "text": "Содержание образовательной программы является полным, логически связанным и обеспечивает целостное понимание изучаемых дисциплин"}, {"id": "q2", "short": "Преподавание", "scale": "agree", "text": "Преподавание сложных технических тем осуществляется на высоком уровне, материал излагается понятно и системно"}, {"id": "q3", "short": "Практическая применимость", "scale": "agree", "text": "Получаемые знания и навыки имеют практическую применимость для будущей профессиональной деятельности"}, {"id": "q4", "short": "Инфраструктура", "scale": "agree", "text": "Программа обеспечивает доступ к современной инфраструктуре, включая программное обеспечение, вычислительные ресурсы и данные"}, {"id": "q5", "short": "Участие инд. партнеров", "scale": "agree", "text": "Индустриальные партнеры участвуют в реализации программы на достаточном уровне, включая лекции, проекты, стажировки и иные практико-ориентированные форматы"}], "scales": {"sat": ["совершенно не удовлетворен(-а)", "скорее не удовлетворен(-а)", "частично удовлетворен(-а)", "скорее удовлетворен(-а)", "полностью удовлетворен(-а)"], "agree": ["полностью не согласен(-а)", "скорее не согласен(-а)", "частично согласен(-а)", "скорее согласен(-а)", "полностью согласен(-а)"]}, "closed": false}, PEOPLE = {"иванов иван иванович": [1, 2, "ДЭ 22-25"], "петрова анна сергеевна": [2, 1, ""]}, KEY = 'opros-demo-answered';
+  function norm(s) { return String(s || '').toLowerCase().replace(/ё/g, 'е').replace(/[^a-zа-я]+/g, ' ').trim(); }
+  function reply(obj, status) {
+    return new Promise(function (res) { setTimeout(function () {
+      res({ status: status || 200, json: function () { return Promise.resolve(obj); } });
+    }, 700); });
+  }
+  function done() { try { return JSON.parse(localStorage.getItem(KEY) || '{}'); } catch (e) { return {}; } }
+  window.fetch = function (url, opt) {
+    var body = opt && opt.body ? JSON.parse(opt.body) : {};
+    if (/api\/config$/.test(url)) return reply(CONFIG);
+    var rec = PEOPLE[norm(body.fio)];
+    if (/api\/lookup$/.test(url)) {
+      if (!rec) return reply({ found: false });
+      return reply({ found: true, program: rec[0], programName: CONFIG.programs[rec[0]], course: rec[1], group: rec[2] });
+    }
+    if (/api\/submit$/.test(url)) {
+      if (!rec) return reply({ ok: false, code: 'fio', error: 'ФИО не найдено в списке студентов. В демо есть только: Иванов Иван Иванович, Петрова Анна Сергеевна' }, 400);
+      var d = done(), k = norm(body.fio);
+      if (d[k]) return d[k] === body.nonce ? reply({ ok: true, repeat: true })
+        : reply({ ok: false, code: 'already', error: 'Вы уже проходили опрос' }, 409);
+      d[k] = body.nonce; try { localStorage.setItem(KEY, JSON.stringify(d)); } catch (e) {}
+      return reply({ ok: true });
+    }
+    return reply({ ok: false, error: 'Нет в демо' }, 404);
+  };
+  window.demoReset = function () { try { localStorage.removeItem(KEY); localStorage.removeItem('opros-ai-2026-done'); } catch (e) {} location.reload(); };
+})();
+</script>
+<script>
+(function () {
+  'use strict';
+  var DONE_KEY = 'opros-ai-2026-done';
+  var started = Date.now();
+  var nonce = (window.crypto && crypto.randomUUID) ? crypto.randomUUID()
+    : Date.now().toString(36) + '-' + Math.random().toString(36).slice(2) + Math.random().toString(36).slice(2);
+  var cfg = null, sending = false;
+  var $ = function (id) { return document.getElementById(id); };
+  var form = $('form'), groupSel = $('group'), groupText = $('group-text');
+  var CHECK = '<svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="#1b1b1b" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';
+  var INFO = '<svg viewBox="0 0 24 24" width="38" height="38" fill="none" stroke="#2c3e66" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.01"/></svg>';
+
+  function store(k, v) { try { v === null ? localStorage.removeItem(k) : localStorage.setItem(k, v); } catch (e) {} }
+  function load(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
+
+  function showDone(kind, when) {
+    var info = kind === 'already';
+    $('done').classList.toggle('info', info);
+    $('done-icon').innerHTML = info ? INFO : CHECK;
+    $('done-title').textContent = info ? 'Вы уже проходили опрос' : 'Ответ принят';
+    $('done-text').textContent = info
+      ? 'Ваш ответ был записан раньше и учтён. Повторно ответить нельзя — можно закрыть страницу.'
+      : 'Спасибо! Ваш ответ записан. Отправлять анкету ещё раз не нужно — можно закрыть страницу.';
+    $('done-meta').textContent = when ? 'Отправлено ' + when : '';
+    document.body.classList.add('is-done');
+    window.scrollTo(0, 0);
+    $('done-title').setAttribute('tabindex', '-1'); $('done-title').focus();
+  }
+
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+
+  function build() {
+    $('programs').innerHTML = cfg.programs.map(function (p, i) {
+      var m = p.match(/^(\S+\s.*?)\s—\s(.*)$/);
+      return '<label class="opt"><input type="radio" name="program" value="' + i + '"><span>' +
+        (m ? esc(m[2]) + '<span class="code">' + esc(m[1]) + '</span>' : esc(p)) + '</span></label>';
+    }).join('');
+    $('courses').innerHTML = cfg.courses.map(function (c) {
+      return '<label><input type="radio" name="course" value="' + c + '"><span>' + c + ' курс</span></label>';
+    }).join('');
+    var n = 0;
+    ['sat', 'agree'].forEach(function (kind) {
+      $('qs-' + kind).innerHTML = cfg.questions.filter(function (q) { return q.scale === kind; }).map(function (q) {
+        n += 1;
+        var labels = cfg.scales[kind];
+        return '<div class="q" data-q="' + q.id + '"><p class="text" id="t-' + q.id + '"><span class="num">' + n + '</span><span>' + esc(q.text) + ' <span class="req">*</span></span></p>' +
+          '<fieldset class="scale" aria-labelledby="t-' + q.id + '"><legend>' + esc(q.text) + '</legend>' +
+          labels.map(function (l, i) {
+            return '<label><input type="radio" name="' + q.id + '" value="' + (i + 1) + '" aria-label="' + (i + 1) + ' — ' + esc(l) + '"><b>' + (i + 1) + '</b><small>' + esc(l) + '</small></label>';
+          }).join('') + '</fieldset><div class="ends" aria-hidden="true"><span>1 — ' + esc(labels[0]) + '</span><span>5 — ' + esc(labels[4]) + '</span></div></div>';
+      }).join('');
+    });
+    progress();
+  }
+
+  function val(name) { var el = form.querySelector('input[name="' + name + '"]:checked'); return el ? el.value : ''; }
+
+  // ФИО -> программа, курс, группа из списка студентов
+  var lookupSeq = 0, lookupTimer = null;
+  function applyLookup(res) {
+    form.querySelectorAll('input[name=program],input[name=course]').forEach(function (el) { el.checked = false; });
+    groupSel.innerHTML = '<option value=""></option>';
+    var found = res && res.found;
+    $('who').hidden = !found;
+    $('fio-miss').hidden = !(res && !res.found);
+    $('fio-hint').hidden = !!res;
+    $('f-group').hidden = !(found && !res.group);   // групп 1 курса нет в списке — студент вписывает сам
+    if (found) {
+      form.querySelector('input[name=program][value="' + res.program + '"]').checked = true;
+      form.querySelector('input[name=course][value="' + res.course + '"]').checked = true;
+      $('who-program').textContent = res.programName;
+      $('who-course').textContent = res.course + ' курс';
+      $('who-group-box').hidden = !res.group;
+      if (res.group) { groupSel.innerHTML = '<option selected>' + esc(res.group) + '</option>'; $('who-group').textContent = res.group; }
+    }
+    progress();
+  }
+  function lookupFio() {
+    var fio = $('fio').value.trim(), seq = ++lookupSeq;
+    if (fio.split(/\s+/).length < 2) return applyLookup(null);
+    fetch('api/lookup', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ fio: fio }) })
+      .then(function (r) { return r.json(); })
+      .then(function (res) { if (seq === lookupSeq && 'found' in res) applyLookup(res); })
+      .catch(function () {});
+  }
+  $('fio').addEventListener('input', function () {
+    clearTimeout(lookupTimer);
+    lookupTimer = setTimeout(lookupFio, 450);
+  });
+  $('fio').addEventListener('change', function () { clearTimeout(lookupTimer); lookupFio(); });
+
+  function groupValue() { return $('f-group').hidden ? groupSel.value : groupText.value.trim(); }
+
+  function progress() {
+    var total = 4 + cfg.questions.length, ok = 0;
+    if ($('fio').value.trim().split(/\s+/).length >= 2) ok++;
+    if (val('program')) ok++;
+    if (val('course')) ok++;
+    if (groupValue()) ok++;
+    cfg.questions.forEach(function (q) {
+      var a = !!val(q.id); if (a) ok++;
+      var box = form.querySelector('[data-q="' + q.id + '"]');
+      box.classList.toggle('answered', a); if (a) box.classList.remove('missing');
+    });
+    $('prog-text').textContent = 'Отвечено ' + ok + ' из ' + total;
+    $('prog-bar').style.width = (ok / total * 100) + '%';
+  }
+
+  function showErr(msg, focusEl) {
+    var e = $('err'); e.textContent = msg; e.classList.add('show');
+    if (focusEl) { focusEl.scrollIntoView({ block: 'center', behavior: 'smooth' }); setTimeout(function () { (focusEl.querySelector && focusEl.querySelector('input,select') || focusEl).focus({ preventScroll: true }); }, 300); }
+  }
+
+  function setBusy(b) {
+    sending = b;
+    $('send').disabled = b; $('send').classList.toggle('busy', b);
+    $('send-text').textContent = b ? 'Отправляем…' : 'Отправить ответ';
+  }
+
+  form.addEventListener('change', function () { $('err').classList.remove('show'); progress(); });
+  form.addEventListener('input', progress);
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    if (sending) return;                 // повторное нажатие во время отправки ничего не делает
+    $('err').classList.remove('show');
+    var fio = $('fio').value.trim();
+    if (fio.split(/\s+/).length < 2) return showErr('Введите фамилию, имя и отчество.', $('fio'));
+    if (!val('program') || !val('course')) return showErr('Не нашли вас в списке студентов. Проверьте ФИО: полностью, с отчеством, как в зачётке.', $('fio'));
+    if (!groupValue()) return showErr('Впишите группу.', $('f-group'));
+    var missing = cfg.questions.filter(function (q) { return !val(q.id); });
+    missing.forEach(function (q) { form.querySelector('[data-q="' + q.id + '"]').classList.add('missing'); });
+    if (missing.length) return showErr('Ответьте на все вопросы: осталось ' + missing.length + '.', form.querySelector('[data-q="' + missing[0].id + '"]'));
+
+    var body = { fio: fio, program: val('program'), course: val('course'), group: groupValue(),
+      nonce: nonce, elapsed: Date.now() - started, website: form.website.value };
+    cfg.questions.forEach(function (q) { body[q.id] = val(q.id); });
+    setBusy(true);
+    var ctrl = window.AbortController ? new AbortController() : null;
+    var timer = setTimeout(function () { if (ctrl) ctrl.abort(); }, 20000);
+    fetch('api/submit', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body), signal: ctrl ? ctrl.signal : undefined })
+      .then(function (r) { return r.json().catch(function () { return { ok: false, error: 'Сервер ответил с ошибкой (' + r.status + ').' }; }); })
+      .then(function (res) {
+        clearTimeout(timer);
+        if (res.ok || res.code === 'already') {
+          var when = new Date().toLocaleString('ru-RU', { day: 'numeric', month: 'long', hour: '2-digit', minute: '2-digit' });
+          if (res.ok) store(DONE_KEY, when);
+          return showDone(res.ok ? 'ok' : 'already', res.ok ? when : '');
+        }
+        setBusy(false);
+        if (res.code === 'closed') { document.body.classList.add('is-closed'); return; }
+        var target = res.code === 'fio' || res.code === 'cell' ? $('fio') : null;
+        showErr(res.error || 'Не удалось отправить. Попробуйте ещё раз.', target);
+      })
+      .catch(function () {
+        clearTimeout(timer); setBusy(false);
+        showErr('Нет связи с сервером. Проверьте интернет и нажмите «Отправить» ещё раз — повторного ответа не будет.');
+      });
+  });
+
+  $('again').addEventListener('click', function () {
+    store(DONE_KEY, null);
+    location.reload();
+  });
+
+  fetch('api/config').then(function (r) { return r.json(); }).then(function (c) {
+    cfg = c; build();
+    if ($('fio').value.trim()) lookupFio();   // браузер мог восстановить ФИО после перезагрузки
+    if (c.closed) document.body.classList.add('is-closed');
+    var done = load(DONE_KEY);
+    if (done) showDone('ok', done);
+  }).catch(function () { showErr('Не удалось загрузить анкету. Обновите страницу.'); });
+})();
+</script>
+</body>
+</html>
