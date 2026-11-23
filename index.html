@@ -2,78 +2,107 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>ДЕМО · Оценка образовательной программы — опрос студентов</title>
-<meta name="description" content="Анонимный опрос студентов 1–2 курса программ топ-уровня в сфере ИИ, РГАУ-МСХА имени К.А. Тимирязева.">
+<meta name="description" content="Анонимный опрос студентов 1–2 курса программ топ-уровня в сфере ИИ. 6 вопросов, около 2 минут.">
 <meta name="robots" content="noindex">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#0e2e70">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Оценка образовательной программы">
+<meta property="og:description" content="Анонимный опрос студентов 1–2 курса программ топ-уровня в сфере ИИ. 6 вопросов, около 2 минут.">
+<meta property="og:image" content="https://soniamurtazalieva-beep.github.io/opros-topii-demo/assets/og-opros.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://soniamurtazalieva-beep.github.io/opros-topii-demo/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230e2e70'/%3E%3Cpath d='M18 33l9 9 19-20' fill='none' stroke='%23fff' stroke-width='6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap">
 <style>
-:root{--ink:#2c2c2c;--green:#3ece5f;--green-deep:#177a3c;--green-soft:#e9f8ed;--paper:#fff;--mist:#f3f5f3;--line:#dde1dd;--muted:#666b66;--danger:#b42318;--danger-soft:#fdf0ef}
+/* Синяя шапка в цвет логотипа института, ниже — белые карточки на холодном светлом фоне; шапка с «дорожками», как на логотипе */
+:root{
+ --hero:#0e2e70;--hero-2:#091e4a;--hero-ink:#fff;--hero-muted:#b9c8e8;--hero-line:rgba(140,170,230,.35);
+ --bg:#f1f4f9;--paper:#fff;--ink:#17203a;--muted:#5a6580;--line:#dde3ee;--field:#c5cddd;
+ --accent:#0e2e70;--accent-hover:#163d8f;--accent-ink:#fff;--tint:#e9effb;
+ --ok:#1f9d55;--ok-soft:#e6f5ec;--danger:#b42318;--danger-soft:#fdeeec;--focus:#2d6cdf;
+ --bar-bg:rgba(241,244,249,.94);
+ --font:"Manrope","Segoe UI","Helvetica Neue",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+ --hero:#0f2557;--hero-2:#0a1838;--hero-muted:#a9b9dc;
+ --bg:#0b1222;--paper:#131c31;--ink:#e6ebf5;--muted:#9ba7bf;--line:#253150;--field:#34416a;
+ --accent:#4f7fe3;--accent-hover:#6690ea;--tint:#1a2a52;--ok:#34b46c;--ok-soft:#143326;--danger:#f0786b;--danger-soft:#3a1a18;--focus:#7da2f0;
+ --bar-bg:rgba(11,18,34,.92);color-scheme:dark}}
+:root[data-theme="dark"]{
+ --hero:#0f2557;--hero-2:#0a1838;--hero-muted:#a9b9dc;
+ --bg:#0b1222;--paper:#131c31;--ink:#e6ebf5;--muted:#9ba7bf;--line:#253150;--field:#34416a;
+ --accent:#4f7fe3;--accent-hover:#6690ea;--tint:#1a2a52;--ok:#34b46c;--ok-soft:#143326;--danger:#f0786b;--danger-soft:#3a1a18;--focus:#7da2f0;
+ --bar-bg:rgba(11,18,34,.92);color-scheme:dark}
 *{box-sizing:border-box}
-body{margin:0;font-family:"Suisse Intl","Helvetica Neue",Helvetica,Arial,sans-serif;font-size:16px;line-height:1.5;color:var(--ink);background:var(--mist);-webkit-font-smoothing:antialiased}
-:focus-visible{outline:3px solid var(--green-deep);outline-offset:2px}
-.top{background:#fff;border-bottom:1px solid var(--line)}
-.top .in{max-width:760px;margin:0 auto;padding:12px 16px;display:flex;align-items:center;gap:12px}
-.top img{height:42px;width:auto;display:block}
-.top .uni{font-size:12.5px;line-height:1.3;color:var(--muted)}.top .uni b{display:block;color:var(--ink);font-weight:600}
-main{max-width:760px;margin:0 auto;padding:28px 16px 64px}
-.eyebrow{display:flex;align-items:center;gap:12px;color:var(--muted);font-size:12.5px;letter-spacing:.09em;text-transform:uppercase;margin:0 0 12px}
-.eyebrow i{width:32px;height:2px;background:var(--green)}
-h1{font-size:34px;line-height:1.12;font-weight:700;margin:0 0 12px;letter-spacing:-.01em}
-.lead{color:var(--muted);font-size:17px;margin:0 0 20px}
-.anon{display:flex;gap:12px;align-items:flex-start;background:var(--green-soft);border-radius:14px;padding:14px 16px;font-size:14.5px;margin:0 0 24px}
-.anon svg{flex:0 0 22px;margin-top:1px}
-.card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:24px;margin:0 0 16px}
-.card h2{font-size:20px;font-weight:600;margin:0 0 4px}
+body{margin:0;font-family:var(--font);font-size:16px;line-height:1.5;color:var(--ink);background:var(--bg);-webkit-font-smoothing:antialiased}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+.wrap{max-width:760px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+/* шапка */
+.hero{position:relative;overflow:hidden;color:var(--hero-ink);background:linear-gradient(160deg,var(--hero) 0%,var(--hero-2) 100%);padding-block:20px 72px}
+.hero .traces{position:absolute;right:-40px;top:0;width:520px;height:100%;pointer-events:none}
+.hero .wrap{position:relative}
+.brand{display:flex;align-items:center;gap:12px;margin:0 0 34px}
+.brand img{width:52px;height:auto;display:block}
+.brand span{font-size:13px;line-height:1.35;color:var(--hero-muted)}.brand b{display:block;color:var(--hero-ink);font-weight:700}
+.meta{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 16px;padding:0;list-style:none}
+.meta li{font-size:13px;font-weight:600;letter-spacing:.02em;padding:5px 12px;border-radius:999px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.16);color:var(--hero-ink)}
+h1{font-size:40px;line-height:1.08;font-weight:800;margin:0 0 14px;letter-spacing:-.02em;text-wrap:balance}
+.lead{color:var(--hero-muted);font-size:17px;margin:0;max-width:34em}
+main{padding-block:0 64px}
+main>.wrap{margin-top:-44px;position:relative}
+.anon{display:flex;gap:12px;align-items:flex-start;background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:16px 18px;font-size:14.5px;margin:0 0 14px;box-shadow:0 8px 24px rgba(9,30,74,.08)}
+.anon .lock{flex:0 0 36px;height:36px;border-radius:10px;background:var(--tint);color:var(--accent);display:flex;align-items:center;justify-content:center}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:24px;margin:0 0 14px}
+.card h2{font-size:20px;font-weight:700;margin:0 0 4px;letter-spacing:-.01em}
 .card .hint{color:var(--muted);font-size:14px;margin:0 0 18px}
+.step{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin:0 0 6px}
 .field{margin:0 0 18px}.field:last-child{margin-bottom:0}
-.field>label,.field>.lbl{display:block;font-weight:500;margin:0 0 6px}
+.field>label{display:block;font-weight:600;margin:0 0 6px}
 .req{color:var(--danger)}
-input[type=text],select{width:100%;font:inherit;padding:12px 14px;border:1px solid #c9ccc9;border-radius:12px;background:#fff;color:var(--ink)}
-select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='9' viewBox='0 0 14 9'%3E%3Cpath d='M1 1l6 6 6-6' fill='none' stroke='%23666' stroke-width='2'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:40px}
-input[type=text]:focus,select:focus{border-color:var(--green-deep);outline:none;box-shadow:0 0 0 3px rgba(23,122,60,.15)}
+input[type=text],select{width:100%;font:inherit;font-size:17px;padding:13px 15px;border:1px solid var(--field);border-radius:12px;background:var(--paper);color:var(--ink)}
+input[type=text]::placeholder{color:var(--muted);opacity:.7}
+input[type=text]:focus,select:focus{border-color:var(--accent);outline:none;box-shadow:0 0 0 3px var(--tint)}
 .small{font-size:13px;color:var(--muted);margin:6px 0 0}
 .fio-miss{color:var(--danger)}
-.who{background:var(--green-soft);border-radius:14px;padding:14px 16px;margin:0 0 18px;display:grid;gap:10px}
+.who{display:grid;grid-template-columns:auto 1fr;gap:12px 14px;align-items:start;background:var(--ok-soft);border-radius:14px;padding:14px 16px;margin:0 0 18px}
+.who .tick{width:28px;height:28px;border-radius:50%;background:var(--ok);display:flex;align-items:center;justify-content:center;grid-row:span 2}
 .who span{display:block;font-size:12.5px;color:var(--muted)}
-.who b{font-weight:500}
+.who b{font-weight:600}
 .who .row{display:flex;gap:32px;flex-wrap:wrap}
-.opts{display:grid;gap:8px}
-.opt{display:flex;gap:12px;align-items:flex-start;border:1px solid #c9ccc9;border-radius:12px;padding:11px 14px;cursor:pointer;background:#fff}
-.opt input{margin:3px 0 0;accent-color:var(--green-deep);width:18px;height:18px;flex:0 0 auto}
-.opt:has(input:checked){border-color:var(--green-deep);background:var(--green-soft)}
-.opt .code{display:block;font-size:13px;color:var(--muted)}
-.seg{display:inline-flex;border:1px solid #c9ccc9;border-radius:999px;padding:3px;background:#fff}
-.seg label{position:relative;cursor:pointer}
-.seg input{position:absolute;opacity:0;inset:0}
-.seg span{display:block;padding:8px 22px;border-radius:999px;font-weight:500}
-.seg input:checked+span{background:var(--ink);color:#fff}
-.seg input:focus-visible+span{outline:3px solid var(--green-deep);outline-offset:1px}
 /* вопросы со шкалой */
-.q{padding:18px 0;border-top:1px solid var(--line)}
+.q{padding:20px 0;border-top:1px solid var(--line)}
 .q:first-of-type{border-top:0;padding-top:4px}
-.q .text{font-weight:500;margin:0 0 12px;display:flex;gap:10px}
-.q .num{flex:0 0 auto;width:26px;height:26px;border-radius:50%;background:var(--mist);font-size:13px;display:inline-flex;align-items:center;justify-content:center;font-weight:600}
-.q.answered .num{background:var(--green);color:#1b1b1b}
+.q:last-child{padding-bottom:0}
+.q .text{font-weight:600;margin:0 0 14px;display:flex;gap:12px;line-height:1.45}
+.q .num{flex:0 0 auto;width:28px;height:28px;border-radius:50%;background:var(--tint);color:var(--accent);font-size:13px;display:inline-flex;align-items:center;justify-content:center;font-weight:800;font-variant-numeric:tabular-nums;transition:background .15s,color .15s}
+.q.answered .num{background:var(--accent);color:var(--accent-ink)}
 .q.missing .text{color:var(--danger)}
 .q.missing .num{background:var(--danger);color:#fff}
-.scale{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px;margin:0;padding:0;border:0}
+.scale{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px;margin:0;padding:0;border:0;min-width:0}
 .scale legend{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
 .scale label{position:relative;cursor:pointer;text-align:center}
 .scale input{position:absolute;opacity:0;inset:0}
-.scale b{display:flex;align-items:center;justify-content:center;height:46px;border:1px solid #c9ccc9;border-radius:12px;font-size:18px;font-weight:600;background:#fff;transition:background .12s,border-color .12s}
-.scale label:hover b{border-color:var(--green-deep)}
-.scale input:checked+b{background:var(--green);border-color:var(--green);color:#1b1b1b}
-.scale input:focus-visible+b{outline:3px solid var(--green-deep);outline-offset:2px}
-.scale small{display:block;font-size:11.5px;line-height:1.25;color:var(--muted);margin-top:6px}
-.scale input:checked~small{color:var(--ink)}
+.scale b{display:flex;align-items:center;justify-content:center;height:50px;border:1px solid var(--field);border-radius:12px;font-size:19px;font-weight:700;background:var(--paper);font-variant-numeric:tabular-nums;transition:background .12s,border-color .12s,transform .12s}
+.scale label:hover b{border-color:var(--accent);background:var(--tint)}
+.scale input:checked+b{background:var(--accent);border-color:var(--accent);color:var(--accent-ink);transform:translateY(-1px);box-shadow:0 4px 12px rgba(14,46,112,.25)}
+.scale input:focus-visible+b{outline:3px solid var(--focus);outline-offset:2px}
+.scale small{display:block;font-size:11.5px;line-height:1.25;color:var(--muted);margin-top:7px}
+.scale input:checked~small{color:var(--ink);font-weight:600}
 .ends{display:none}
 /* отправка */
-.submit{position:sticky;bottom:0;background:rgba(243,245,243,.96);backdrop-filter:blur(6px);margin:0 -16px;padding:14px 16px calc(14px + env(safe-area-inset-bottom));border-top:1px solid var(--line);display:flex;align-items:center;gap:16px;flex-wrap:wrap}
-.progress{flex:1 1 180px;font-size:14px;color:var(--muted)}
-.bar{height:6px;border-radius:3px;background:var(--line);margin-top:6px;overflow:hidden}.bar i{display:block;height:100%;width:0;background:var(--green);transition:width .2s}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;background:var(--green);color:#1b1b1b;font:inherit;font-weight:600;font-size:16px;padding:14px 30px;border-radius:999px;border:0;cursor:pointer;min-width:200px}
-.btn:hover{background:#36c257}
-.btn[disabled]{background:#b9c2bb;color:#4b514c;cursor:progress}
+.submit{position:sticky;bottom:0;z-index:5;background:var(--bar-bg);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);margin:6px calc(-1 * max(16px,env(safe-area-inset-left,0px))) 0;padding:14px max(16px,env(safe-area-inset-right,0px)) calc(14px + env(safe-area-inset-bottom,0px));border-top:1px solid var(--line);display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.progress{flex:1 1 180px;font-size:14px;color:var(--muted);font-variant-numeric:tabular-nums}
+.bar{height:6px;border-radius:3px;background:var(--line);margin-top:6px;overflow:hidden}.bar i{display:block;height:100%;width:0;background:var(--accent);transition:width .2s}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;background:var(--accent);color:var(--accent-ink);font:inherit;font-weight:700;font-size:16px;padding:15px 32px;border-radius:999px;border:0;cursor:pointer;min-width:220px}
+.btn:hover{background:var(--accent-hover)}
+.btn[disabled]{opacity:.65;cursor:progress}
 .spin{width:18px;height:18px;border:2.5px solid currentColor;border-right-color:transparent;border-radius:50%;animation:s .7s linear infinite;display:none}
 .btn.busy .spin{display:inline-block}
 @keyframes s{to{transform:rotate(360deg)}}
@@ -81,58 +110,72 @@ input[type=text]:focus,select:focus{border-color:var(--green-deep);outline:none;
 .err.show{display:block}
 .hp{position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden}
 /* экран «ответ принят» */
-.done{display:none;text-align:center;padding:40px 24px}
-.done .icon{width:76px;height:76px;border-radius:50%;background:var(--green);display:flex;align-items:center;justify-content:center;margin:0 auto 18px}
-.done.info .icon{background:#e7ebf3}
-.done h2{font-size:26px;margin:0 0 8px}
+.done{display:none;text-align:center;padding:44px 24px 36px;box-shadow:0 8px 24px rgba(9,30,74,.08)}
+.done .icon{width:84px;height:84px;border-radius:50%;background:var(--ok);display:flex;align-items:center;justify-content:center;margin:0 auto 20px;box-shadow:0 0 0 10px var(--ok-soft);animation:pop .35s ease-out}
+.done.info .icon{background:var(--tint);color:var(--accent);box-shadow:none}
+@keyframes pop{from{transform:scale(.6);opacity:.3}to{transform:scale(1);opacity:1}}
+.done h2{font-size:28px;font-weight:800;margin:0 0 8px}
 .done p{color:var(--muted);margin:0 auto 6px;max-width:30em}
-.done .meta{font-size:14px;margin-top:14px}
-.done button.link{background:none;border:0;color:var(--green-deep);font:inherit;font-size:14px;text-decoration:underline;cursor:pointer;margin-top:22px}
-body.is-done #form,body.is-done .intro{display:none}
+.done .meta-line{display:inline-block;font-size:14px;margin-top:14px;padding:6px 14px;border-radius:999px;background:var(--bg);color:var(--ink)}
+.done .meta-line:empty{display:none}
+.done button.link{display:block;margin:26px auto 0;background:none;border:0;color:var(--accent);font:inherit;font-size:14px;font-weight:600;text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+body.is-done #form,body.is-done .anon{display:none}
 body.is-done .done{display:block}
 .closed{display:none}
 body.is-closed #form{display:none}body.is-closed .closed{display:block}
 @media(max-width:560px){
- h1{font-size:27px}.lead{font-size:16px}
- .card{padding:18px 16px;border-radius:16px}
- .scale{gap:6px}.scale b{height:46px;font-size:17px}
+ .hero{padding-block:16px 64px}.brand{margin-bottom:24px}.brand img{width:44px}
+ h1{font-size:30px}.lead{font-size:16px}
+ .card{padding:20px 16px;border-radius:16px}
+ .scale{gap:6px}.scale b{height:50px;font-size:18px}
  /* на телефоне подписи под каждой цифрой не помещаются: показываем только края шкалы строкой ниже */
  .scale small{display:none}
- .ends{display:flex;justify-content:space-between;gap:16px;font-size:12px;line-height:1.3;color:var(--muted);margin-top:6px}
+ .ends{display:flex;justify-content:space-between;gap:16px;font-size:12px;line-height:1.3;color:var(--muted);margin-top:7px}
  .ends span:last-child{text-align:right}
  .btn{width:100%}
+ .hero .traces{opacity:.55;width:360px;right:-120px}
 }
-@media(prefers-reduced-motion:reduce){*{transition:none!important;animation-duration:2s!important}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 </style>
 </head>
 <body>
 <div class="demo-bar"><div class="in"><b>Демо-версия.</b> Ответы никуда не отправляются.
 Для проверки введите ФИО <b>Иванов Иван Иванович</b> (2 курс) или <b>Петрова Анна Сергеевна</b> (1 курс, группу вписать вручную).
 <button type="button" onclick="demoReset()">Начать заново</button></div></div>
-<style>.demo-bar{background:#fff6d6;border-bottom:1px solid #ecd98a;font-size:14px}
+<style>.demo-bar{background:#fff6d6;color:#3b2f00;border-bottom:1px solid #ecd98a;font-size:14px}
 .demo-bar .in{max-width:760px;margin:0 auto;padding:10px 16px}
-.demo-bar button{font:inherit;font-size:13px;margin-left:6px;padding:3px 10px;border:1px solid #c9b25a;border-radius:999px;background:#fff;cursor:pointer}</style>
+.demo-bar button{font:inherit;font-size:13px;margin-left:6px;padding:3px 10px;border:1px solid #c9b25a;border-radius:999px;background:#fff;color:#3b2f00;cursor:pointer}</style>
 
-<header class="top"><div class="in">
-  <img src="assets/institute-mark-navy.png" width="240" height="220" alt="">
-  <span class="uni"><b>РГАУ-МСХА имени К.А. Тимирязева</b>Проектный институт цифровой трансформации АПК</span>
-</div></header>
-
-<main>
-  <div class="intro">
-    <p class="eyebrow"><i></i>Программы топ-уровня в сфере ИИ</p>
-    <h1>Оценка образовательной программы</h1>
-    <p class="lead">Нам важно ваше мнение, чтобы развивать и улучшать программу. Шесть вопросов, около двух минут.</p>
-    <div class="anon">
-      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#177a3c" stroke-width="2" aria-hidden="true"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
-      <span><b>Анкета анонимная.</b> ФИО нужно только для того, чтобы каждый студент ответил один раз. Оно не сохраняется вместе с ответами: никто не увидит, как ответили именно вы.</span>
+<header class="hero">
+  <svg class="traces" viewBox="0 0 520 300" preserveAspectRatio="xMaxYMid slice" fill="none" stroke="var(--hero-line)" stroke-width="2" aria-hidden="true">
+    <path d="M120 40H360l40-28"/><circle cx="406" cy="8" r="6"/>
+    <path d="M200 74H380l44-30"/><circle cx="430" cy="40" r="6"/>
+    <path d="M260 108H440l40 26"/><circle cx="486" cy="138" r="6"/>
+    <path d="M300 250H420l44-28"/><circle cx="470" cy="218" r="6"/>
+    <path d="M180 284H400l40 22"/>
+  </svg>
+  <div class="wrap">
+    <div class="brand">
+      <img src="assets/institute-mark-white.png" width="240" height="247" alt="">
+      <span><b>РГАУ-МСХА имени К.А. Тимирязева</b>Проектный институт цифровой трансформации АПК</span>
     </div>
+    <ul class="meta"><li>Анонимно</li><li>6 вопросов</li><li>≈ 2 минуты</li></ul>
+    <h1>Оценка образовательной программы</h1>
+    <p class="lead">Для студентов 1–2 курса программ топ-уровня в сфере ИИ. Нам важно ваше мнение, чтобы развивать и улучшать программу.</p>
+  </div>
+</header>
+
+<main><div class="wrap">
+  <div class="anon">
+    <span class="lock"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></span>
+    <span><b>Анкета анонимная.</b> ФИО нужно только для того, чтобы каждый студент ответил один раз. Оно не сохраняется вместе с ответами: никто не увидит, как ответили именно вы.</span>
   </div>
 
   <div class="card closed"><h2>Опрос завершён</h2><p class="hint" style="margin:0">Спасибо всем, кто ответил.</p></div>
 
   <form id="form" novalidate>
     <section class="card" aria-labelledby="h-about">
+      <span class="step">Шаг 1 из 3</span>
       <h2 id="h-about">О вас</h2>
       <p class="hint">По этим данным сверяем, что вы студент программы, и считаем результаты по программам и курсам.</p>
       <div class="field">
@@ -142,6 +185,7 @@ body.is-closed #form{display:none}body.is-closed .closed{display:block}
         <p class="small fio-miss" id="fio-miss" hidden>Не нашли вас в списке студентов 1–2 курса. Проверьте написание: полностью, с отчеством, как в зачётке.</p>
       </div>
       <div class="who" id="who" hidden aria-live="polite">
+        <span class="tick"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
         <div><span>Программа</span><b id="who-program"></b></div>
         <div class="row"><div><span>Курс</span><b id="who-course"></b></div><div id="who-group-box"><span>Группа</span><b id="who-group"></b></div></div>
       </div>
@@ -159,12 +203,14 @@ body.is-closed #form{display:none}body.is-closed .closed{display:block}
     </section>
 
     <section class="card" aria-labelledby="h-q0">
+      <span class="step">Шаг 2 из 3</span>
       <h2 id="h-q0">Общая оценка</h2>
       <p class="hint">1 — совсем не устраивает, 5 — всё полностью устраивает.</p>
       <div id="qs-sat"></div>
     </section>
 
     <section class="card" aria-labelledby="h-agree">
+      <span class="step">Шаг 3 из 3</span>
       <h2 id="h-agree">Насколько вы согласны с утверждениями</h2>
       <p class="hint">1 — полностью не согласен(-а), 5 — полностью согласен(-а).</p>
       <div id="qs-agree"></div>
@@ -183,10 +229,10 @@ body.is-closed #form{display:none}body.is-closed .closed{display:block}
     <div class="icon" id="done-icon"></div>
     <h2 id="done-title">Ответ принят</h2>
     <p id="done-text">Спасибо! Ваш ответ записан. Отправлять анкету ещё раз не нужно — можно закрыть страницу.</p>
-    <p class="meta" id="done-meta"></p>
+    <p class="meta-line" id="done-meta"></p>
     <button type="button" class="link" id="again">На этом устройстве отвечает другой студент</button>
   </section>
-</main>
+</div></main>
 
 <script>
 /* ДЕМО: вместо сервера. Ответы остаются в этом браузере и никуда не отправляются. */
@@ -230,8 +276,8 @@ body.is-closed #form{display:none}body.is-closed .closed{display:block}
   var cfg = null, sending = false;
   var $ = function (id) { return document.getElementById(id); };
   var form = $('form'), groupSel = $('group'), groupText = $('group-text');
-  var CHECK = '<svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="#1b1b1b" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';
-  var INFO = '<svg viewBox="0 0 24 24" width="38" height="38" fill="none" stroke="#2c3e66" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.01"/></svg>';
+  var CHECK = '<svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="#fff" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';
+  var INFO = '<svg viewBox="0 0 24 24" width="38" height="38" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.01"/></svg>';
 
   function store(k, v) { try { v === null ? localStorage.removeItem(k) : localStorage.setItem(k, v); } catch (e) {} }
   function load(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
