@@ -127,11 +127,16 @@ body.is-closed #form{display:none}body.is-closed .closed{display:block}
  .hero{padding-block:16px 64px}.brand{margin-bottom:24px}.brand img{width:44px}
  h1{font-size:30px}.lead{font-size:16px}
  .card{padding:20px 16px;border-radius:16px}
- .scale{gap:6px}.scale b{height:50px;font-size:18px}
- /* на телефоне подписи под каждой цифрой не помещаются: показываем только края шкалы строкой ниже */
- .scale small{display:none}
- .ends{display:flex;justify-content:space-between;gap:16px;font-size:12px;line-height:1.3;color:var(--muted);margin-top:7px}
- .ends span:last-child{text-align:right}
+ /* на телефоне в строку подписи не помещаются: шкала столбиком, у каждой цифры полная подпись */
+ .scale{grid-template-columns:1fr;gap:6px}
+ .scale label{display:flex;align-items:center;gap:12px;text-align:left;border:1px solid var(--field);border-radius:12px;padding:5px 12px 5px 5px;background:var(--paper);transition:background .12s,border-color .12s}
+ .scale label:has(input:checked){background:var(--tint);border-color:var(--accent)}
+ .scale label:has(input:focus-visible){outline:3px solid var(--focus);outline-offset:2px}
+ .scale b{flex:0 0 40px;width:40px;height:40px;border:0;border-radius:9px;background:var(--tint);color:var(--accent);font-size:17px}
+ .scale label:hover b{background:var(--tint)}
+ .scale input:checked+b{transform:none;box-shadow:none}
+ .scale small{font-size:15px;line-height:1.3;color:var(--ink);margin:0}
+ .scale input:checked~small{font-weight:700}
  .btn{width:100%}
  .hero .traces{opacity:.55;width:360px;right:-120px}
 }
